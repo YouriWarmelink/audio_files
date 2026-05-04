@@ -72,7 +72,11 @@
 
   <script>
     const params = new URLSearchParams(window.location.search);
-    const file = params.get('file') || 'test_audio.m4a';
+    const file = params.get('file');
+    if (!file) {
+      document.getElementById('play-btn').style.display = 'none';
+      document.getElementById('error').style.display = 'block';
+    }
     const audio = new Audio('audio/' + file);
     const btn = document.getElementById('play-btn');
 

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Afspelen</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    #play-btn {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 3px solid #fff;
+      background: transparent;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: background 0.2s;
+    }
+
+    #play-btn:hover { background: rgba(255,255,255,0.1); }
+
+    #play-btn svg { width: 48px; height: 48px; fill: #fff; }
+
+    #play-btn.playing svg { display: none; }
+    #play-btn.playing::after {
+      content: '❚❚';
+      color: #fff;
+      font-size: 28px;
+      letter-spacing: 4px;
+    }
+
+    #error {
+      color: #fff;
+      font-family: sans-serif;
+      font-size: 18px;
+      text-align: center;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <button id="play-btn" aria-label="Afspelen">
+    <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+  </button>
+
+  <div id="error" style="display:none">Geen audio gevonden.</div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const id = parseInt(params.get('id'));
+
+    if (!id || id < 1 || id > 20) {
+      document.getElementById('play-btn').style.display = 'none';
+      document.getElementById('error').style.display = 'block';
+    } else {
+      const audio = new Audio('audio/' + id + '.mp3');
+      const btn = document.getElementById('play-btn');
+
+      btn.addEventListener('click', () => {
+        if (audio.paused) {
+          audio.play();
+          btn.classList.add('playing');
+        } else {
+          audio.pause();
+          btn.classList.remove('playing');
+        }
+      });
+
+      audio.addEventListener('ended', () => btn.classList.remove('playing'));
+    }
+  </script>
+
+</body>
+</html>

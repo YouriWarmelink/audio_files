@@ -59,27 +59,26 @@
 
   <script>
     const params = new URLSearchParams(window.location.search);
-    const id = parseInt(params.get('id'));
+    const file = params.get('file') || 'test_audio.m4a';
+    const audio = new Audio('audio/' + file);
+    const btn = document.getElementById('play-btn');
 
-    if (!id || id < 1 || id > 20) {
-      document.getElementById('play-btn').style.display = 'none';
+    audio.addEventListener('error', () => {
+      btn.style.display = 'none';
       document.getElementById('error').style.display = 'block';
-    } else {
-      const audio = new Audio('audio/' + id + '.mp3');
-      const btn = document.getElementById('play-btn');
+    });
 
-      btn.addEventListener('click', () => {
-        if (audio.paused) {
-          audio.play();
-          btn.classList.add('playing');
-        } else {
-          audio.pause();
-          btn.classList.remove('playing');
-        }
-      });
+    btn.addEventListener('click', () => {
+      if (audio.paused) {
+        audio.play();
+        btn.classList.add('playing');
+      } else {
+        audio.pause();
+        btn.classList.remove('playing');
+      }
+    });
 
-      audio.addEventListener('ended', () => btn.classList.remove('playing'));
-    }
+    audio.addEventListener('ended', () => btn.classList.remove('playing'));
   </script>
 
 </body>

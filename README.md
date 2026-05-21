@@ -13,6 +13,8 @@ https://youriwarmelink.github.io/audio_files/?file=Kim.mp3
 https://youriwarmelink.github.io/audio_files/?file=Leona.mp3
 https://youriwarmelink.github.io/audio_files/?file=Linda.mp3
 https://youriwarmelink.github.io/audio_files/?file=Maaike.mp3
+https://youriwarmelink.github.io/audio_files/?file=Maartje.mp3
 https://youriwarmelink.github.io/audio_files/?file=Maike.mp3
+https://youriwarmelink.github.io/audio_files/?file=Nancy.mp3
 https://youriwarmelink.github.io/audio_files/?file=Roos.mp3
 ```
